@@ -1,0 +1,95 @@
+{
+	"info": {
+		"name": "Payment Gateway API Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/health",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8000",
+					"path": ["health"]
+				}
+			}
+		},
+		{
+			"name": "2. Create Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"current_order_id\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{ "key": "X-Api-Key", "value": "key_test_abc123" },
+					{ "key": "X-Api-Secret", "value": "secret_test_xyz789" },
+					{ "key": "Content-Type", "value": "application/json" }
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 10000,\n    \"currency\": \"INR\",\n    \"receipt\": \"rcpt_postman_001\"\n}"
+				},
+				"url": "http://localhost:8000/api/v1/orders"
+			}
+		},
+		{
+			"name": "3. Process Payment (Public)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"current_payment_id\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{ "key": "Content-Type", "value": "application/json" }
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"order_id\": \"{{current_order_id}}\",\n    \"method\": \"upi\",\n    \"vpa\": \"test@upi\"\n}"
+				},
+				"url": "http://localhost:8000/api/v1/payments/public"
+			}
+		},
+		{
+			"name": "4. Poll Payment Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8000/api/v1/payments/{{current_payment_id}}/public"
+			}
+		},
+		{
+			"name": "5. Fetch Merchant Stats",
+			"request": {
+				"method": "GET",
+				"header": [
+					{ "key": "X-Api-Key", "value": "key_test_abc123" },
+					{ "key": "X-Api-Secret", "value": "secret_test_xyz789" }
+				],
+				"url": "http://localhost:8000/api/v1/merchant/stats"
+			}
+		}
+	]
+}

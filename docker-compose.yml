@@ -1,4 +1,3 @@
-cat > docker-compose.yml << 'EOF'
 version: '3.8'
 
 services:
@@ -16,4 +15,34 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-EOF
+
+  api:
+    build:
+      context: ./backend
+    container_name: gateway_api
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://gateway_user:gateway_pass@postgres:5432/payment_gateway
+      PORT: 8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  dashboard:
+    build:
+      context: ./frontend
+    container_name: gateway_dashboard
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+
+  checkout:
+    build:
+      context: ./checkout-page
+    container_name: gateway_checkout
+    ports:
+      - "3001:80"
+    depends_on:
+      - api
