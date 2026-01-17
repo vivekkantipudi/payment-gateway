@@ -1,0 +1,13 @@
+:root { --primary: #6366f1; --bg: #f8fafc; --text: #1e293b; --success: #22c55e; --fail: #ef4444; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; }
+.dashboard-page { display: flex; min-height: 100vh; }
+.side-nav { width: 240px; background: #fff; border-right: 1px solid #e2e8f0; padding: 2rem; }
+.main-content { flex: 1; padding: 2rem; }
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+.stat-card { background: #fff; padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.stat-card .value { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+.data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; }
+.data-table th, .data-table td { padding: 1rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+.success { color: var(--success); font-weight: 600; }
+.failed { color: var(--fail); font-weight: 600; }
+.status-container { text-align: center; margin-top: 5rem; padding: 2rem; background: white; border-radius: 12px; width: 400px; margin-left: auto; margin-right: auto; }
