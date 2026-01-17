@@ -25,7 +25,7 @@ The system is built as a microservices architecture managed by Docker Compose:
 
 1.  **Clone the Repository**:
     ```bash
-    git clone <your-repo-url>
+    git clone https://github.com/vivekkantipudi/payment-gateway
     cd payment-gateway
     ```
 
