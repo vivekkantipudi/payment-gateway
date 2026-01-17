@@ -19,6 +19,7 @@ The system is built as a microservices architecture managed by Docker Compose:
 * **Checkout (Port 3001)**: React-based customer payment portal.
 * **Database**: PostgreSQL for persistent storage of orders and payments.
 # Project Structure
+```bash
 payment-gateway/
 │
 ├── docker-compose.yml     
@@ -41,6 +42,7 @@ payment-gateway/
 └── checkout-page/         
     ├── Dockerfile
     └── src/pages/Checkout.jsx, Success.jsx, Failure.jsx
+```
 
 
 
