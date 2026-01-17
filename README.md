@@ -29,7 +29,7 @@ payment-gateway/
 ├── backend/
 │   ├── Dockerfile
 │   ├── src/
-│   │   ├── PaymentGatewayApplication.*
+│   │   ├── PaymentGatewayApplication.js
 │   │   ├── controllers/
 │   │   ├── services/
 │   │   ├── config/
