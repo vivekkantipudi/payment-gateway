@@ -18,6 +18,29 @@ The system is built as a microservices architecture managed by Docker Compose:
 * **Dashboard (Port 3000)**: React-based merchant analytics interface.
 * **Checkout (Port 3001)**: React-based customer payment portal.
 * **Database**: PostgreSQL for persistent storage of orders and payments.
+# Project Structure
+payment-gateway/
+│
+├── docker-compose.yml     
+├── README.md              
+├── .env.example           
+│
+├── backend/
+│   ├── Dockerfile
+│   ├── src/
+│   │   ├── PaymentGatewayApplication.*
+│   │   ├── controllers/
+│   │   ├── services/
+│   │   ├── config/
+│   │   └── resources/schema.sql   
+│
+├── frontend/              
+│   ├── Dockerfile
+│   └── src/pages/Login.jsx, Dashboard.jsx, Transactions.jsx
+│
+└── checkout-page/         
+    ├── Dockerfile
+    └── src/pages/Checkout.jsx, Success.jsx, Failure.jsx
 
 
 
